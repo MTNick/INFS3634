@@ -51,6 +51,7 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorAccent"
+        android:onClick="goToSettings"
         android:text="Settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
