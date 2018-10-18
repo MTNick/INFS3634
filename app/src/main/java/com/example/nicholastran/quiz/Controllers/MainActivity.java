@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("SIGNED IN");
         }
 
+        fbHelper.getQuestions();
+
     }
 
     public void logIn(View view) {
