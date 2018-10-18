@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         pass = findViewById(R.id.editTextPassword);
         fbHelper = new FirebaseHelper();
 
+
+
     }
 
     @Override
@@ -45,11 +47,17 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("SIGNED IN");
         }
 
+        // TEST FIREBASEHELPER FUNCTIONS HERE
         fbHelper.getQuestions();
+
 
     }
 
     public void logIn(View view) {
+
+        Boolean ans = fbHelper.isAnswerCorrect(0, "0");
+        System.out.println("ANSWER: " + ans);
+
         Intent intent = new Intent(this, Home.class);
         EditText editText = findViewById(R.id.editTextUsername);
         String message = editText.getText().toString();

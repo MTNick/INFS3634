@@ -3,6 +3,7 @@ package com.example.nicholastran.quiz.Models;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import com.example.nicholastran.quiz.Controllers.Questions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -102,21 +103,42 @@ public class FirebaseHelper {
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                int i = 0;
                 // Get questions
-                System.out.println("VALUE: " + dataSnapshot.getValue().toString());
-                // Add to the questions arraylist
+                for (DataSnapshot snapshot : dataSnapshot.child("questions").getChildren()) {
+                    String question =  snapshot.child("question").getValue().toString();
+                    String answer = snapshot.child("answer").getValue().toString();
+
+                    // Make it of Questions class
+                    Questions q = new Questions(question, answer);
+
+                    // Add to the questions arraylist
+                    Questions.questions.add(i, q);
+                    i++;
+
+                    if (Questions.questions.size() > 0) {
+                        System.out.println("ADDED QUESTIONS");
+                    }
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                System.out.println("ERROR: " + databaseError.getMessage());
             }
         });
     }
 
-    // Check whether the answer is correct or not
-    public Boolean isAnswerCorrect(int qNumber) {
-        // Check questions against questions.get(qNumber).answer
-        return false;
+    // Check whether the answer is correct or not //NOT TESTED
+    public Boolean isAnswerCorrect(int qNumber, String answer) {
+        if (answer.equals(Questions.questions.get(qNumber).getAnswer())) {
+            return true;
+        }
+        else {
+            System.out.println(answer + " is incorrect\n" + Questions.questions.get(qNumber).getAnswer() +
+                    " is correct!");
+            return false;
+        }
     }
 }
