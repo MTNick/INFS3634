@@ -1,4 +1,4 @@
-package com.example.nicholastran.quiz.Controllers;
+package com.example.nicholastran.quiz.Models;
 
 import java.util.ArrayList;
 

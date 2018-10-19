@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/blue"
-    tools:context=".Question">
+    tools:context=".Controllers.Question">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/questionText"
         android:layout_width="300dp"
         android:layout_height="51dp"
         android:layout_marginStart="8dp"
@@ -34,7 +34,7 @@
         android:text="@string/Answer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/questionText" />
 
     <Button
         android:id="@+id/buttonAnswer2"
@@ -82,11 +82,10 @@
         android:id="@+id/textViewCorrect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Correct"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.753"
@@ -98,9 +97,10 @@
         android:id="@+id/buttonSkip"
         android:layout_width="66dp"
         android:layout_height="37dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:onClick="skipClicked"
         android:text="@string/Skip"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -12,15 +12,15 @@
         <activity android:name=".Controllers.MainActivity">
 
         </activity>
-        <activity android:name=".Home" />
+        <activity android:name=".Controllers.Home" />
         <activity
-            android:name=".Question"
-            android:parentActivityName=".Home">
+            android:name=".Controllers.Question"
+            android:parentActivityName=".Controllers.Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Controllers.MainActivity" />
         </activity>
-        <activity android:name=".SignUp" >
+        <activity android:name=".Controllers.SignUp" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -32,7 +32,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".Settings"
-            android:parentActivityName=".Home"></activity>
+            android:parentActivityName=".Controllers.Home"></activity>
     </application>
 
 </manifest>
