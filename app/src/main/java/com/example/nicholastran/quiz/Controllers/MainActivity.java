@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         pass = findViewById(R.id.editTextPassword);
         fbHelper = new FirebaseHelper();
 
-
-
+        // TEST
+        //fbHelper.getQuestions();
     }
 
     @Override
@@ -47,16 +47,11 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("SIGNED IN");
         }
 
-        // TEST FIREBASEHELPER FUNCTIONS HERE
-        fbHelper.getQuestions();
-
+        // TEST FUNCTIONS HERE
 
     }
 
     public void logIn(View view) {
-
-        Boolean ans = fbHelper.isAnswerCorrect(0, "0");
-        System.out.println("ANSWER: " + ans);
 
         Intent intent = new Intent(this, Home.class);
         EditText editText = findViewById(R.id.editTextUsername);
@@ -70,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
         String uName = name.getText().toString();
         String pWord = pass.getText().toString();
         String response = fbHelper.signUpWithEmail(uName, pWord);
-        if (response == "success") {
-            //Intent intent = new Intent(this, SignUp.class);
-            //startActivity(intent);
+        if (response.equals("success")) {
+            Intent intent = new Intent(this, SignUp.class);
+            startActivity(intent);
         }
         else {
             Toast.makeText(this, response, Toast.LENGTH_LONG);

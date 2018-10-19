@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Questions {
 
     public static ArrayList<Questions> questions = new ArrayList<>();
+    public static ArrayList<Boolean> userProgress = new ArrayList<>();
+    public static int currentProgress;
 
     private String question;
     private String answer;
