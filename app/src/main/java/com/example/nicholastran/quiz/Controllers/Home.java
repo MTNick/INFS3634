@@ -22,6 +22,7 @@ public class Home extends AppCompatActivity {
 
         progress = findViewById(R.id.overallProgress);
         fbHelper = new FirebaseHelper();
+        fbHelper.getProgress();
     }
 
     @Override

@@ -140,7 +140,7 @@ public class FirebaseHelper {
         }
     }
 
-    // Get progress (do when get to "start quiz screen") and add to userProgress and currentProgress
+    // Get progress (do when get to home activity) and add to userProgress and currentProgress
     public void getProgress() {
         dbRef = FirebaseDatabase.getInstance().getReference();
         dbRef.child("progress").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -180,10 +180,12 @@ public class FirebaseHelper {
 
     }
 
+    /*
     // Check overall progress
     public int checkProgress() {
         return Questions.currentProgress;
     }
+    */
 
     // Check if user got current question right
     public Boolean gotQuestionCorrect(int qNumber) {
@@ -202,6 +204,30 @@ public class FirebaseHelper {
         dbRef = FirebaseDatabase.getInstance().getReference();
         String uid = mAuth.getUid();
         dbRef.child("progress").child(uid).child(qNumber).setValue("correct");
+    }
+
+    // Get all potential answers for all questions and add to allAnswers
+    public void getAllAnswers() {
+        dbRef = FirebaseDatabase.getInstance().getReference();
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                for (DataSnapshot question : dataSnapshot.child("answerOptions").getChildren()) {
+                    Answers answer = new Answers(question.child("a").getValue().toString(),
+                            question.child("b").getValue().toString(),
+                            question.child("c").getValue().toString(),
+                            question.child("d").getValue().toString());
+                    Answers.allAnswers.add(i, answer);
+                    i++;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // TEST FUNCTIONS HERE
-
+        fbHelper.getAllAnswers();
     }
 
     public void logIn(View view) {
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else {
-            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_LONG);
+            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_LONG).show();
         }
     }
 
