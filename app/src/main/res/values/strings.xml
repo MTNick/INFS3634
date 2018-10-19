@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Quiz</string>
+    <string name="Password">Password</string>
+    <string name="Name">Name</string>
+    <string name="Email">Email Address</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Skip">Skip</string>
+    <string name="Next">Next</string>
+    <string name="Confirm">Confirm</string>
+    <string name="Confirm_Password">Confirm Password</string>
+    <string name="Answer">Answer</string>
 </resources>
