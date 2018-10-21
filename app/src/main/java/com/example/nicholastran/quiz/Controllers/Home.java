@@ -22,23 +22,22 @@ public class Home extends AppCompatActivity {
 
         progress = findViewById(R.id.overallProgress);
         fbHelper = new FirebaseHelper();
-        fbHelper.getProgress();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+        // Get questions, answers, progress
+        fbHelper.getAllAnswers();
+        fbHelper.getQuestions();
+        fbHelper.getProgress();
+
         String currentProg = String.valueOf(Questions.currentProgress);
         progress.setText("You have completed " + currentProg + "%!");
-
-        // Get questions
-        fbHelper.getAllAnswers();
     }
 
     public void goToQuestion(View view) {
-        // Get questions
-        fbHelper.getQuestions();
 
         Intent intent = new Intent(this, Question.class);
         startActivity(intent);

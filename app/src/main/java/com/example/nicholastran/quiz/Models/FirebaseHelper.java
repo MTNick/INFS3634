@@ -13,6 +13,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.SQLOutput;
+
 public class FirebaseHelper {
 
     private FirebaseAuth mAuth;
@@ -177,7 +179,7 @@ public class FirebaseHelper {
                 System.out.println("ERROR: " +databaseError.getMessage());
             }
         });
-
+        System.out.println("GOT PROGRESS");
     }
 
     /*
@@ -219,6 +221,7 @@ public class FirebaseHelper {
                             question.child("c").getValue().toString(),
                             question.child("d").getValue().toString());
                     Answers.allAnswers.add(i, answer);
+                    System.out.println("GOT ANSWERS");
                     i++;
                 }
             }
