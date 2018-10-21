@@ -45,7 +45,9 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void signUp(View view) {
-        if (password.equals(confirmPassword)) {
+
+        if (validate()){
+        //if (password.getText().toString().equals(confirmPassword.getText().toString())) {
             String result = fbHelper.signUpWithEmail(email.getText().toString(), password.getText().toString());
             if (result.equals("success")) {
                 System.out.println("Signed in");
@@ -61,5 +63,14 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(this, "Both password fields must match.", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public boolean validate() {
+        boolean temp = false;
+        String p1 = password.getText().toString();
+        String p2 = confirmPassword.getText().toString();
+        if (p1.equals(p2))
+            return true;
+        return temp;
     }
 }
