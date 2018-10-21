@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // TEST FUNCTIONS HERE
-        fbHelper.getAllAnswers();
+        //fbHelper.getAllAnswers();
     }
 
     public void logIn(View view) {

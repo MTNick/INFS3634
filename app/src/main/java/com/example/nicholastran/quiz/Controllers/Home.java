@@ -31,6 +31,9 @@ public class Home extends AppCompatActivity {
 
         String currentProg = String.valueOf(Questions.currentProgress);
         progress.setText("You have completed " + currentProg + "%!");
+
+        // Get questions
+        fbHelper.getAllAnswers();
     }
 
     public void goToQuestion(View view) {
