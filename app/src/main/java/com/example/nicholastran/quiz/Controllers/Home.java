@@ -22,13 +22,14 @@ public class Home extends AppCompatActivity {
 
         progress = findViewById(R.id.overallProgress);
         fbHelper = new FirebaseHelper();
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        // Get questions, answers, progress
+        // Get questions, answers
         fbHelper.getAllAnswers();
         fbHelper.getQuestions();
         fbHelper.getProgress();

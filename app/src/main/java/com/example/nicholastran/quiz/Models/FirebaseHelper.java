@@ -145,15 +145,15 @@ public class FirebaseHelper {
     // Get progress (do when get to home activity) and add to userProgress and currentProgress
     public void getProgress() {
         dbRef = FirebaseDatabase.getInstance().getReference();
-        dbRef.child("progress").addListenerForSingleValueEvent(new ValueEventListener() {
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String uid = mAuth.getCurrentUser().toString();
+                String uid = mAuth.getCurrentUser().getUid().toString();
                 int correct = 0;
                 int incorrect = 0;
                 int i = 0;
-                for (DataSnapshot snapshot : dataSnapshot.child("questions").getChildren()) {
-                    if (dataSnapshot.child(uid).hasChild(String.valueOf(i))) {
+                for (DataSnapshot snapshot : dataSnapshot.child("progress").getChildren()) {
+                    if (snapshot.child(uid).hasChild(String.valueOf(i))) {
                         // Got correct
                         Questions.userProgress.add(i, true);
                         correct++;
@@ -172,14 +172,15 @@ public class FirebaseHelper {
                     Questions.currentProgress = 0;
                 }
 
+                System.out.println("GOT PROGRESS");
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("ERROR: " +databaseError.getMessage());
+                System.out.println("ERROR: " + databaseError.getMessage());
             }
         });
-        System.out.println("GOT PROGRESS");
     }
 
     /*
@@ -210,6 +211,7 @@ public class FirebaseHelper {
 
     // Get all potential answers for all questions and add to allAnswers
     public void getAllAnswers() {
+        Answers.allAnswers.clear();
         dbRef = FirebaseDatabase.getInstance().getReference();
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
