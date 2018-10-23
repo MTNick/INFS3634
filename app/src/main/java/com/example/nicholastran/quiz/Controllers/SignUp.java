@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.example.nicholastran.quiz.Controllers.MainActivity;
 import com.example.nicholastran.quiz.Models.FirebaseHelper;
 import com.example.nicholastran.quiz.R;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 public class SignUp extends AppCompatActivity {
 
@@ -53,34 +55,35 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void signUp(View view) {
-        System.out.println("PASSWORD: " + password.getText().toString());
-        System.out.println("CONF PASSWORD: " + confirmPassword.getText().toString());
         String pWord = password.getText().toString();
         String cPWord = confirmPassword.getText().toString();
         String uName = email.getText().toString();
 
-        if (pWord.equals(cPWord)) {
+        if (pWord.equals(cPWord) && (!pWord.isEmpty() && !uName.isEmpty())) {
+            final KProgressHUD hud = KProgressHUD.create(SignUp.this).show();
             mAuth.createUserWithEmailAndPassword(uName, pWord).addOnCompleteListener(
                     new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                hud.dismiss();
+                                new SVProgressHUD(SignUp.this).showSuccessWithStatus("Welcome 😍");
                                 System.out.println("SUCCESSFUL SIGN UP");
-                                System.out.println("Signed in");
                                 fbHelper.getQuestions();
                                 Intent intent = new Intent(getApplicationContext(), Home.class);
                                 startActivity(intent);
                             }
                             else {
+                                hud.dismiss();
                                 String fail = task.getException().getMessage();
-                                Toast.makeText(SignUp.this, fail, Toast.LENGTH_SHORT).show();
+                                new SVProgressHUD(SignUp.this).showErrorWithStatus(fail);
                             }
                         }
                     }
             );
         }
         else {
-            Toast.makeText(this, "Both password fields must match.", Toast.LENGTH_SHORT).show();
+            new SVProgressHUD(this).showErrorWithStatus("Passwords must match and not be empty");
         }
 
     }

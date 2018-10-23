@@ -21,6 +21,8 @@ public class FirebaseHelper {
     private String response;
     FirebaseUser user;
     private DatabaseReference dbRef;
+    double correct;
+    double totalQuestions;
 
     // Constructor
     public FirebaseHelper() {
@@ -144,35 +146,39 @@ public class FirebaseHelper {
 
     // Get progress (do when get to home activity) and add to userProgress and currentProgress
     public void getProgress() {
+        String uid = mAuth.getCurrentUser().getUid().toString();
         dbRef = FirebaseDatabase.getInstance().getReference();
-        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        dbRef.child("progress").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String uid = mAuth.getCurrentUser().getUid().toString();
-                int correct = 0;
-                int incorrect = 0;
+                correct = 0;
                 int i = 0;
-                for (DataSnapshot snapshot : dataSnapshot.child("progress").getChildren()) {
-                    if (snapshot.child(uid).hasChild(String.valueOf(i))) {
-                        // Got correct
-                        Questions.userProgress.add(i, true);
-                        correct++;
-                    }
-                    else {
-                        // Got incorrect
-                        Questions.userProgress.add(i, false);
-                        incorrect++;
-                    }
+                while (i < dataSnapshot.getChildrenCount()) {
+                    Questions.userProgress.add(i, true);
+                    correct++;
                     i++;
                 }
-                if (correct + incorrect > 0) {
-                    Questions.currentProgress = correct / (correct + incorrect);
-                }
-                else {
-                    Questions.currentProgress = 0;
-                }
 
-                System.out.println("GOT PROGRESS");
+                // Get total number of questions
+                dbRef.child("totalQuestions").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        totalQuestions = Integer.valueOf(dataSnapshot.getValue().toString());
+                        System.out.println("TQ: " + totalQuestions);
+                        System.out.println("CORRECT: " + correct);
+                        Questions.currentProgress = (correct / totalQuestions) * 100;
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                while (i < totalQuestions) {
+                    Questions.userProgress.add(i, false);
+                    i++;
+                }
 
             }
 
