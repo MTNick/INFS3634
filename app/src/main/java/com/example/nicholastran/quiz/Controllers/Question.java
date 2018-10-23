@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.example.nicholastran.quiz.Models.Answers;
 import com.example.nicholastran.quiz.Models.FirebaseHelper;
 import com.example.nicholastran.quiz.Models.Questions;
@@ -32,11 +33,21 @@ public class Question extends AppCompatActivity {
         correct = findViewById(R.id.textViewCorrect);
         fbHelper = new FirebaseHelper();
 
+        if (Answers.allAnswers.size() > 0) {
+            System.out.println("NOT EMPTY");
+        }
+        else {
+            System.out.println("EMPTY");
+        }
+
         qNumber = 0;
+
+        System.out.println("FIRST");
         String firstQuestion = Questions.questions.get(0).getQuestion();
         question.setText(firstQuestion);
 
         // Set the answer options
+        System.out.println("SECOND");
         Answers ans = Answers.allAnswers.get(0);
         aButton = findViewById(R.id.buttonAnswer1);
         bButton = findViewById(R.id.buttonAnswer2);
@@ -54,9 +65,10 @@ public class Question extends AppCompatActivity {
         super.onStart();
 
         // Check if they've already done the question
+        /*
         if (fbHelper.gotQuestionCorrect(qNumber)) {
             correct.setText("Completed!");
-        }
+        }*/
     }
 
     public void skipClicked(View view) {
@@ -69,12 +81,12 @@ public class Question extends AppCompatActivity {
 
         if (fbHelper.isAnswerCorrect(qNumber, answerChosen)) {
             // Correct answer
-            Toast.makeText(this, "Correct :)", Toast.LENGTH_LONG).show();
+            new SVProgressHUD(Question.this).showSuccessWithStatus("Correct 😍");
             nextQuestion();
         }
         else {
             // Incorrect answer
-            Toast.makeText(this, "Incorrect, try again :(", Toast.LENGTH_LONG).show();
+            new SVProgressHUD(Question.this).showErrorWithStatus("Incorrect 😔");
         }
     }
 
@@ -85,7 +97,7 @@ public class Question extends AppCompatActivity {
 
     private void nextQuestion() {
         qNumber++;
-        if (qNumber > Questions.questions.size()) {
+        if (qNumber < Questions.questions.size()) {
             // Change the question
             String nextQuestion = Questions.questions.get(qNumber).getQuestion();
             question.setText(nextQuestion);

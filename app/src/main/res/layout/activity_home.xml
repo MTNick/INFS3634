@@ -53,6 +53,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="monospace"
         android:text="Welcome!"
+        android:textAlignment="center"
         android:textColor="#cbd094"
         android:textSize="35dp"
         android:textStyle="bold"

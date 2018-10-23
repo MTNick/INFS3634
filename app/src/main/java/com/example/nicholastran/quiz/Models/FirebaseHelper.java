@@ -13,12 +13,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.SQLOutput;
+
 public class FirebaseHelper {
 
     private FirebaseAuth mAuth;
     private String response;
     FirebaseUser user;
     private DatabaseReference dbRef;
+    double correct;
+    double totalQuestions;
 
     // Constructor
     public FirebaseHelper() {
@@ -142,42 +146,47 @@ public class FirebaseHelper {
 
     // Get progress (do when get to home activity) and add to userProgress and currentProgress
     public void getProgress() {
+        String uid = mAuth.getCurrentUser().getUid().toString();
         dbRef = FirebaseDatabase.getInstance().getReference();
-        dbRef.child("progress").addListenerForSingleValueEvent(new ValueEventListener() {
+        dbRef.child("progress").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String uid = mAuth.getCurrentUser().toString();
-                int correct = 0;
-                int incorrect = 0;
+                correct = 0;
                 int i = 0;
-                for (DataSnapshot snapshot : dataSnapshot.child("questions").getChildren()) {
-                    if (dataSnapshot.child(uid).hasChild(String.valueOf(i))) {
-                        // Got correct
-                        Questions.userProgress.add(i, true);
-                        correct++;
-                    }
-                    else {
-                        // Got incorrect
-                        Questions.userProgress.add(i, false);
-                        incorrect++;
-                    }
+                while (i < dataSnapshot.getChildrenCount()) {
+                    Questions.userProgress.add(i, true);
+                    correct++;
                     i++;
                 }
-                if (correct + incorrect > 0) {
-                    Questions.currentProgress = correct / (correct + incorrect);
-                }
-                else {
-                    Questions.currentProgress = 0;
+
+                // Get total number of questions
+                dbRef.child("totalQuestions").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        totalQuestions = Integer.valueOf(dataSnapshot.getValue().toString());
+                        System.out.println("TQ: " + totalQuestions);
+                        System.out.println("CORRECT: " + correct);
+                        Questions.currentProgress = (correct / totalQuestions) * 100;
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                while (i < totalQuestions) {
+                    Questions.userProgress.add(i, false);
+                    i++;
                 }
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("ERROR: " +databaseError.getMessage());
+                System.out.println("ERROR: " + databaseError.getMessage());
             }
         });
-
     }
 
     /*
@@ -208,6 +217,7 @@ public class FirebaseHelper {
 
     // Get all potential answers for all questions and add to allAnswers
     public void getAllAnswers() {
+        Answers.allAnswers.clear();
         dbRef = FirebaseDatabase.getInstance().getReference();
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -219,6 +229,7 @@ public class FirebaseHelper {
                             question.child("c").getValue().toString(),
                             question.child("d").getValue().toString());
                     Answers.allAnswers.add(i, answer);
+                    System.out.println("GOT ANSWERS");
                     i++;
                 }
             }
