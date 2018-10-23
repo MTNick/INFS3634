@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.example.nicholastran.quiz.Models.Answers;
 import com.example.nicholastran.quiz.Models.FirebaseHelper;
 import com.example.nicholastran.quiz.Models.Questions;
@@ -80,12 +81,12 @@ public class Question extends AppCompatActivity {
 
         if (fbHelper.isAnswerCorrect(qNumber, answerChosen)) {
             // Correct answer
-            Toast.makeText(this, "Correct :)", Toast.LENGTH_LONG).show();
+            new SVProgressHUD(Question.this).showSuccessWithStatus("Correct 😍");
             nextQuestion();
         }
         else {
             // Incorrect answer
-            Toast.makeText(this, "Incorrect, try again :(", Toast.LENGTH_LONG).show();
+            new SVProgressHUD(Question.this).showErrorWithStatus("Incorrect 😔");
         }
     }
 
