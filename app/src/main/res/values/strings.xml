@@ -9,4 +9,5 @@
     <string name="Confirm">Confirm</string>
     <string name="Confirm_Password">Confirm Password</string>
     <string name="Answer">Answer</string>
+    <string name="title_activity_coding_questions">CodingQuestions</string>
 </resources>
