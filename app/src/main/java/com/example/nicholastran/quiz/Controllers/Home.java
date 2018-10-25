@@ -38,6 +38,11 @@ public class Home extends AppCompatActivity {
         progress.setText("You have completed " + currentProg + "%!");
     }
 
+    public void goToChallenge(View view) {
+        Intent intent = new Intent(this, CodingQuestions.class);
+        startActivity(intent);
+    }
+
     public void goToQuestion(View view) {
 
         Intent intent = new Intent(this, Question.class);

@@ -9,9 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controllers.MainActivity">
-
-        </activity>
+        <activity android:name=".Controllers.MainActivity"></activity>
         <activity android:name=".Controllers.Home" />
         <activity
             android:name=".Controllers.Question"
@@ -20,9 +18,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Controllers.MainActivity" />
         </activity>
-        <activity android:name=".Controllers.SignUp" >
+        <activity android:name=".Controllers.SignUp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,8 +30,12 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Settings"
-            android:parentActivityName=".Controllers.Home"></activity>
+        <activity
+            android:name=".Settings"
+            android:parentActivityName=".Controllers.Home" />
+        <activity
+            android:name=".Controllers.CodingQuestions"
+            android:label="@string/title_activity_coding_questions"></activity>
     </application>
 
 </manifest>
