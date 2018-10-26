@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controllers.MainActivity" />
-        <activity android:name=".Controllers.Home" />
+        <activity android:name=".Controllers.MainActivity"
+            android:label="@string/title_activity_login"/>
+        <activity android:name=".Controllers.Home"
+            android:label="@string/title_activity_home"/>
         <activity
             android:name=".Controllers.Question"
             android:parentActivityName=".Controllers.Home">
@@ -18,7 +20,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Controllers.MainActivity" />
         </activity>
-        <activity android:name=".Controllers.SignUp">
+        <activity android:name=".Controllers.SignUp"
+            android:label="@string/title_activity_signup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,22 +34,24 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".Settings"
-            android:parentActivityName=".Controllers.Home" />
-        <activity
             android:name=".Controllers.CodingQuestions"
-            android:label="@string/title_activity_coding_questions" />
+            android:label="@string/title_activity_coding_questions"
+            android:parentActivityName=".Controllers.Home"/>
         <activity
             android:name=".Controllers.Topics"
+            android:label="@string/title_activity_topics"
             android:parentActivityName=".Controllers.Home" />
         <activity
             android:name=".Controllers.Loops"
+            android:label="@string/title_activity_loops"
             android:parentActivityName=".Controllers.Topics" />
         <activity
             android:name=".Controllers.Methods"
+            android:label="@string/title_activity_methods"
             android:parentActivityName=".Controllers.Topics" />
         <activity
             android:name=".Controllers.Arrays"
+            android:label="@string/title_activity_arrays"
             android:parentActivityName=".Controllers.Topics"/>
     </application>
 

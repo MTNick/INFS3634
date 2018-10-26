@@ -9,5 +9,12 @@
     <string name="Confirm">Confirm</string>
     <string name="Confirm_Password">Confirm Password</string>
     <string name="Answer">Answer</string>
-    <string name="title_activity_coding_questions">CodingQuestions</string>
+    <string name="title_activity_coding_questions">Coding Questions</string>
+    <string name="title_activity_topics">Topics</string>
+    <string name="title_activity_loops">Loops</string>
+    <string name="title_activity_methods">Methods</string>
+    <string name="title_activity_arrays">Arrays</string>
+    <string name="title_activity_login">Log In</string>
+    <string name="title_activity_signup">Sign Up</string>
+    <string name="title_activity_home">Home</string>
 </resources>
