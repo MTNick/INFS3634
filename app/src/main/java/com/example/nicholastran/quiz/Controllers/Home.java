@@ -49,6 +49,11 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToTopics(View view) {
+        Intent intent = new Intent(this,Topics.class);
+        startActivity(intent);
+    }
+
     public void logOut(View view) {
         fbHelper.logOut();
 

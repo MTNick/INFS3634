@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controllers.MainActivity"></activity>
+        <activity android:name=".Controllers.MainActivity" />
         <activity android:name=".Controllers.Home" />
         <activity
             android:name=".Controllers.Question"
@@ -35,7 +35,19 @@
             android:parentActivityName=".Controllers.Home" />
         <activity
             android:name=".Controllers.CodingQuestions"
-            android:label="@string/title_activity_coding_questions"></activity>
+            android:label="@string/title_activity_coding_questions" />
+        <activity
+            android:name=".Controllers.Topics"
+            android:parentActivityName=".Controllers.Home" />
+        <activity
+            android:name=".Controllers.Loops"
+            android:parentActivityName=".Controllers.Topics" />
+        <activity
+            android:name=".Controllers.Methods"
+            android:parentActivityName=".Controllers.Topics" />
+        <activity
+            android:name=".Controllers.Arrays"
+            android:parentActivityName=".Controllers.Topics"/>
     </application>
 
 </manifest>
